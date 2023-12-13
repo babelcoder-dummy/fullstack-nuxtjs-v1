@@ -9,12 +9,25 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "5.7.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.2.2",
+    "@faker-js/faker": "^8.3.1",
     "@nuxt/devtools": "latest",
     "nuxt": "^3.8.2",
+    "prisma": "^5.7.0",
+    "tsx": "^4.6.2",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   }

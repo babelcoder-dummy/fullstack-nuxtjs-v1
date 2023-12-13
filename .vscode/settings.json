@@ -39,5 +39,10 @@
     "yaml"
   ],
 
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+
+  "[prisma]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }
