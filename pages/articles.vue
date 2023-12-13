@@ -1,21 +1,26 @@
 <script setup lang="ts">
+import type { Column } from '~/components/ui/UiDataTable.vue'
+
+interface ArticleItem {
+  id: number
+  title: string
+  excerpt: string
+}
+
 const { data: articles } = await useFetch('/api/articles')
+const columns: Column<ArticleItem>[] = [
+  { name: 'ID', field: 'id' },
+  { name: 'Title', field: 'title' },
+  { name: 'Excerpt', field: 'excerpt' },
+]
 </script>
 
 <template>
-  <h1 class="title">
-    Article List
-  </h1>
-  <ul>
-    <li v-for="article of articles" :key="article.id">
-      {{ article.title }}
-    </li>
-  </ul>
+  <UiDataTable
+    v-if="articles"
+    title="Article List"
+    :columns="columns"
+    :rows="articles"
+    @trigger="console.log($event)"
+  />
 </template>
-
-<style scoped>
-  .title {
-    color: red;
-    font-size: 36px;
-  }
-</style>
