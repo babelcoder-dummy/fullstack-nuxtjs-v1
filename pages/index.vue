@@ -1,7 +1,10 @@
 <script setup lang="ts">
-const { data: articles } = useFetch('/api/articles')
+const router = useRouter()
 </script>
 
 <template>
-  <UiAutoSuggestion v-if="articles" :items="articles" />
+  Home Page
+  <button @click="router.push('/leaves')">
+    Go to /leaves
+  </button>
 </template>

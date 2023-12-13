@@ -6,7 +6,9 @@ const { data: leaves } = await useFetch('/api/leaves')
   <h1>Leave List</h1>
   <ul>
     <li v-for="leave of leaves" :key="leave.id">
-      {{ leave.reason }}
+      <NuxtLink :to="`/leaves/${leave.id}`">
+        {{ leave.reason }}
+      </NuxtLink>
     </li>
   </ul>
 </template>
