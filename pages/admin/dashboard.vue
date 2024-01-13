@@ -1,7 +1,9 @@
 <script setup lang="ts">
-
+definePageMeta({
+  layout: 'admin',
+})
 </script>
 
 <template>
-  Home Page
+  Dashboard
 </template>
