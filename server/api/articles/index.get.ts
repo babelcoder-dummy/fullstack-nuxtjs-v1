@@ -18,3 +18,7 @@ const findAll = eventHandler(async () => {
 })
 
 export default findAll
+
+export type ArticleList = Awaited<ReturnType<typeof findAll>>
+
+export type ArticleItem = ArticleList[number]

@@ -19,12 +19,15 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@iconify-json/el": "^1.1.8",
+    "@nuxt/ui": "^2.12.0",
     "@prisma/client": "5.7.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.2.2",
     "@faker-js/faker": "^8.3.1",
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "^1.2.0",
     "nuxt": "^3.8.2",
     "prisma": "^5.7.0",
     "tsx": "^4.6.2",
