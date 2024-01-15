@@ -2,9 +2,17 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   telemetry: false,
-  modules: ['@nuxt/ui', "@nuxt/image"],
+  modules: ['@nuxt/ui', '@nuxt/image'],
   routeRules: {
     '/admin': { redirect: '/admin/dashboard' },
+    '/leaves': { ssr: false },
+    '/announcements': { prerender: true },
+    '/articles': { swr: 15 },
+  },
+  nitro: {
+    prerender: {
+      routes: ['/announcements/succurro-sopor-celer-vulgaris'],
+    },
   },
   colorMode: {
     preference: 'light',

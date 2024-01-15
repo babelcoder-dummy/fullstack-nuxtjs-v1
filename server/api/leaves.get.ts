@@ -1,11 +1,23 @@
-const findAll = eventHandler(() => {
-  return [
-    { id: 1, reason: 'Reason#1' },
-    { id: 2, reason: 'Reason#2' },
-    { id: 3, reason: 'Reason#3' },
-    { id: 4, reason: 'Reason#4' },
-    { id: 5, reason: 'Reason#5' },
-  ]
+import db from '~/utils/db'
+
+const findAll = eventHandler(async () => {
+  const leaves = await db.leave.findMany({
+    select: {
+      id: true,
+      status: true,
+      reason: true,
+      rejectionReason: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return leaves
 })
 
 export default findAll
+
+export type LeaveList = Awaited<ReturnType<typeof findAll>>
+
+export type LeaveItem = LeaveList[number]
