@@ -21,7 +21,9 @@
   "dependencies": {
     "@iconify-json/el": "^1.1.8",
     "@nuxt/ui": "^2.12.0",
-    "@prisma/client": "5.7.0"
+    "@prisma/client": "5.7.0",
+    "@vuepic/vue-datepicker": "^7.4.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.2.2",
@@ -29,6 +31,7 @@
     "@nuxt/devtools": "latest",
     "@nuxt/image": "^1.2.0",
     "nuxt": "^3.8.2",
+    "nuxt-lodash": "^2.5.3",
     "prisma": "^5.7.0",
     "tsx": "^4.6.2",
     "vue": "^3.3.8",

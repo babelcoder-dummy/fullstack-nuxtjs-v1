@@ -15,5 +15,8 @@
     <ULink to="/announcements" active-class="text-primary" class="mx-4">
       Announcements
     </ULink>
+    <ULink to="/auth/login" active-class="text-primary" class="mr-4 ml-auto">
+      Login
+    </ULink>
   </header>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LeaveStatus } from '@prisma/client'
-import type { LeaveList } from '~/server/api/leaves.get'
+import type { LeaveList } from '~/server/api/leaves/index.get'
 
 const { leaves } = defineProps<{ leaves: LeaveList }>()
 
@@ -35,4 +35,5 @@ function statusColor(status: LeaveStatus) {
       </template>
     </UCard>
   </section>
+  <UButton icon="i-heroicons-plus" :ui="{ rounded: 'rounded-full' }" class="fixed bottom-4 right-4" to="/leaves/new" />
 </template>
