@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UpdateArticleInput } from '~/server/api/articles/[slug].patch'
+import type { UpdateArticleInput } from '~/server/api/admin/articles/[slug].patch'
 
 const { slug } = defineProps<{ slug: string }>()
 const emit = defineEmits<{
@@ -7,8 +7,18 @@ const emit = defineEmits<{
 }>()
 const { data: article } = await useFetch(`/api/articles/${slug}`)
 
-function handleSubmit(form: UpdateArticleInput) {
-  console.log(form)
+async function handleSubmit(form: UpdateArticleInput) {
+  const formData = new FormData()
+  if (form.title)
+    formData.append('title', form.title)
+  if (form.excerpt)
+    formData.append('excerpt', form.excerpt)
+  if (form.content)
+    formData.append('content', form.content)
+  if (form.image)
+    formData.append('image', form.image)
+
+  await useFetch(`/api/admin/articles/${slug}`, { method: 'PATCH', body: formData })
   emit('success')
 }
 </script>

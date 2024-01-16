@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { CreateLeaveInput } from '~/server/api/leaves/index.post'
 
-function handleSubmit(form: CreateLeaveInput) {
-  console.log(form)
+async function handleSubmit(form: CreateLeaveInput) {
+  await useFetch('/api/leaves', { method: 'POST', body: form })
+  navigateTo('/leaves')
 }
 </script>
 

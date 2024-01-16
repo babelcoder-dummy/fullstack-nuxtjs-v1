@@ -5,7 +5,7 @@ import ArticleDetails from '~/components/article/ArticleDetails.vue'
 import AdminUpdateArticle from '~/components/admin/article/AdminUpdateArticle.vue'
 import AdminCreateArticle from '~/components/admin/article/AdminCreateArticle.vue'
 
-const { data: articles, status } = await useFetch('/api/articles')
+const { data: articles, status, refresh } = await useFetch('/api/articles')
 const isOpen = ref(false)
 const selectedSlug = ref<string>()
 const displayComponent = shallowRef<Component>()
@@ -41,7 +41,10 @@ function items(row: ArticleItem) {
       {
         label: 'Delete',
         icon: 'i-heroicons-trash-20-solid',
-        click() {},
+        click: async () => {
+          await useFetch(`/api/admin/articles/${row.slug}`, { method: 'DELETE' })
+          refresh()
+        },
       },
     ],
   ]
@@ -54,6 +57,7 @@ function openCreateArticle() {
 
 function handleSuccess() {
   isOpen.value = false
+  refresh()
 }
 </script>
 

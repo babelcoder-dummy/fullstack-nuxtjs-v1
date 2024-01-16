@@ -23,4 +23,7 @@ export default defineNuxtConfig({
   ui: {
     icons: ['heroicons', 'el'],
   },
+  image: {
+    domains: ['localhost'],
+  },
 })

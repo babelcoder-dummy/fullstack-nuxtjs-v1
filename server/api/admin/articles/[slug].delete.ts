@@ -2,17 +2,11 @@ import db from '~/utils/db'
 
 const remove = eventHandler(async (event) => {
   const slug = getRouterParam(event, 'slug')!
+  const article = await db.article.delete({
+    where: { slug },
+  })
 
-  try {
-    const article = await db.article.delete({
-      where: { slug },
-    })
-
-    return article
-  }
-  catch {
-    return null
-  }
+  return article
 })
 
 export default remove

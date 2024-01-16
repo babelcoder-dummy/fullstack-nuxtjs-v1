@@ -5,8 +5,9 @@ const route = useRoute()
 const id = +(route.params.id as string)
 const { data: leave } = await useFetch(`/api/leaves/${id}`)
 
-function handleSubmit(form: UpdateLeaveInput) {
-  console.log(form)
+async function handleSubmit(form: UpdateLeaveInput) {
+  await useFetch(`/api/leaves/${id}`, { method: 'PATCH', body: form })
+  navigateTo('/leaves')
 }
 </script>
 

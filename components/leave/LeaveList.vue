@@ -23,9 +23,12 @@ function statusColor(status: LeaveStatus) {
   <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
     <UCard v-for="leave of leaves" :key="leave.id" class="cursor-pointer">
       <template #header>
-        <UBadge :color="statusColor(leave.status)">
-          {{ leave.status }}
-        </UBadge>
+        <div class="flex justify-between items-center">
+          <UBadge :color="statusColor(leave.status)">
+            {{ leave.status }}
+          </UBadge>
+          <UButton variant="ghost" icon="i-heroicons-pencil-square" :to="`/leaves/${leave.id}/edit`" />
+        </div>
       </template>
       <p class="mt-auto">
         {{ leave.reason }}
