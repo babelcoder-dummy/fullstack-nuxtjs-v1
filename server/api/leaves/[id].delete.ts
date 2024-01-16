@@ -1,9 +1,11 @@
 import db from '~/utils/db'
+import { ensureAuth } from '~/utils/server-auth'
 
 const remove = eventHandler(async (event) => {
+  const user = ensureAuth(event)
   const id = +getRouterParam(event, 'id')!
   const leave = await db.leave.findUnique({
-    where: { id },
+    where: { id, userId: user.sub },
   })
   if (!leave)
     throw createError({ statusCode: 404 })

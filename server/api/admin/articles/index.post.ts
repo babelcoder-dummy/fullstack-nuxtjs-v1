@@ -5,10 +5,12 @@ import { readFiles } from 'h3-formidable'
 import db from '~/utils/db'
 import { slugify } from '~/utils/slugify'
 import { createArticleInputValidator } from '~/validators/articles'
+import { ensureAuth } from '~/utils/server-auth'
 
 export type CreateArticleInput = z.infer<typeof createArticleInputValidator>
 
 const create = eventHandler(async (event) => {
+  const user = ensureAuth(event, ['ADMIN', 'MANAGER'])
   const { files: { image: imageList }, fields } = await readFiles(event)
   const image = imageList?.[0]
   if (!image)
@@ -30,7 +32,7 @@ const create = eventHandler(async (event) => {
       ...result.data,
       slug: slugify(result.data.title),
       image: newPath.split('public')[1],
-      userId: 1,
+      userId: user.sub,
     },
   })
 

@@ -1,15 +1,17 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
-import type { z } from 'zod'
+import { z } from 'zod'
 import { readFiles } from 'h3-formidable'
 import db from '~/utils/db'
 import { slugify } from '~/utils/slugify'
 
 import { updateArticleInputValidator } from '~/validators/articles'
+import { ensureAuth } from '~/utils/server-auth'
 
 export type UpdateArticleInput = z.infer<typeof updateArticleInputValidator>
 
 const update = eventHandler(async (event) => {
+  ensureAuth(event, ['ADMIN', 'MANAGER'])
   const slug = getRouterParam(event, 'slug')!
   const { files: { image: imageList }, fields } = await readFiles(event)
 
@@ -35,8 +37,11 @@ const update = eventHandler(async (event) => {
     await fs.copyFile(image.filepath, newPath)
     newImagePath = newPath.split('public')[1]
 
-    if (oldArticle)
-      await fs.unlink(path.join('public', oldArticle.image))
+    if (oldArticle) {
+      const result = z.string().url().safeParse(oldArticle.image)
+      if (!result.success)
+        await fs.unlink(path.join('public', oldArticle.image))
+    }
   }
 
   const article = await db.article.update({

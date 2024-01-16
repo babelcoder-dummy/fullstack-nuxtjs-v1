@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { LoginInput } from '~/server/api/auth/login.post'
 
-function handleSignIn(credentials: LoginInput) {
-  console.log(credentials)
+const { signIn } = useAuth()
+
+async function handleSignIn(credentials: LoginInput) {
+  await signIn(credentials, { callbackUrl: '/' })
 }
 </script>
 

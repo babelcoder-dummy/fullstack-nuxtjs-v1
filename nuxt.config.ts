@@ -2,15 +2,21 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   build: {
-    transpile: ['@vuepic/vue-datepicker'],
+    transpile: ['@vuepic/vue-datepicker', 'jsonwebtoken'],
   },
   telemetry: false,
-  modules: ['@nuxt/ui', '@nuxt/image', 'nuxt-lodash'],
+  modules: ['@nuxt/ui', '@nuxt/image', 'nuxt-lodash', '@sidebase/nuxt-auth'],
   routeRules: {
     '/admin': { redirect: '/admin/dashboard' },
     '/leaves': { ssr: false },
     '/announcements': { prerender: true },
     '/articles': { swr: 15 },
+  },
+  runtimeConfig: {
+    accessToken: {
+      expiresIn: process.env.NUXT_EXPIRES_IN ?? '30m',
+      secretKey: process.env.NUXT_SECRET_KEY,
+    },
   },
   nitro: {
     prerender: {
@@ -25,5 +31,28 @@ export default defineNuxtConfig({
   },
   image: {
     domains: ['localhost'],
+  },
+  auth: {
+    provider: {
+      type: 'local',
+      pages: {
+        login: '/auth/login',
+      },
+      endpoints: {
+        getSession: { path: '/profile' },
+        signOut: { method: 'delete' },
+      },
+      token: {
+        signInResponseTokenPointer: '/token/accessToken',
+        maxAgeInSeconds: 7 * 24 * 60 * 60,
+      },
+      sessionDataType: {
+        id: 'string',
+        email: 'string',
+        name: 'string',
+        role: 'ADMIN | MANAGER | MEMBER',
+        image: 'string',
+      },
+    },
   },
 })
