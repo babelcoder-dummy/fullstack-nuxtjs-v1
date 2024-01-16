@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { ArticleDetails } from '~/server/api/articles/[slug].get'
-
-const { article } = defineProps<{ article: ArticleDetails }>()
+const { slug } = defineProps<{ slug: string }>()
+const { data: article } = useFetch(`/api/articles/${slug}`)
 </script>
 
 <template>
-  <NuxtImg :src="article.image" class="h-[350px] w-full" />
-  <h1 class="text-4xl font-bold">
-    {{ article.title }}
-  </h1>
-  <p class="my-4">
-    {{ article.content }}
-  </p>
+  <template v-if="article">
+    <NuxtImg :src="article.image" class="h-[350px] w-full" />
+    <h1 class="text-4xl font-bold">
+      {{ article.title }}
+    </h1>
+    <p class="my-4">
+      {{ article.content }}
+    </p>
+  </template>
 </template>

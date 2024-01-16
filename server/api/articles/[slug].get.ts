@@ -9,6 +9,7 @@ const findBySlug = eventHandler(async (event) => {
       image: true,
       content: true,
       title: true,
+      excerpt: true,
     },
   })
 

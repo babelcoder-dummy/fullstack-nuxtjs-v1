@@ -1,5 +1,10 @@
+import type { z } from 'zod'
 import db from '~/utils/db'
 import { slugify } from '~/utils/slugify'
+
+import type { updateArticleInputValidator } from '~/validators/articles'
+
+export type UpdateArticleInput = z.infer<typeof updateArticleInputValidator>
 
 const update = eventHandler(async (event) => {
   const slug = getRouterParam(event, 'slug')!
