@@ -21,6 +21,8 @@ const authMenuItems = [
     },
   ],
 ]
+
+const { data: contentNavigation } = await useAsyncData('navigation', () => fetchContentNavigation())
 </script>
 
 <template>
@@ -39,6 +41,15 @@ const authMenuItems = [
     </ULink>
     <ULink to="/announcements" active-class="text-primary" class="mx-4">
       Announcements
+    </ULink>
+    <ULink
+      v-for="item of contentNavigation"
+      :key="item._path"
+      :to="item._path"
+      active-class="text-primary"
+      class="mx-4"
+    >
+      {{ item.title }}
     </ULink>
     <UDropdown
       v-if="status === 'authenticated'"
