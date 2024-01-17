@@ -14,8 +14,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     accessToken: {
-      expiresIn: process.env.NUXT_EXPIRES_IN ?? '30m',
-      secretKey: process.env.NUXT_SECRET_KEY,
+      expiresIn: '30m',
+      secretKey: '',
+    },
+    public: {
+      baseUrl: '',
     },
   },
   nitro: {
