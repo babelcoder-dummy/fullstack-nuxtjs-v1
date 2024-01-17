@@ -33,6 +33,7 @@ const links = [
   <div class="flex flex-col h-screen">
     <div class="my-4 w-full flex-1">
       <div class="flex gap-4 h-full max-h-full">
+        <UiToast />
         <UVerticalNavigation :links="links" class="border-r min-h-full pr-4" />
         <div class="overflow-auto">
           <slot />

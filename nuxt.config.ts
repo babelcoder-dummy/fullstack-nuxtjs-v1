@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     transpile: ['@vuepic/vue-datepicker', 'jsonwebtoken'],
   },
   telemetry: false,
-  modules: ['@nuxt/ui', '@nuxt/image', 'nuxt-lodash', '@sidebase/nuxt-auth'],
+  modules: ['@nuxt/ui', '@nuxt/image', 'nuxt-lodash', '@sidebase/nuxt-auth', '@pinia/nuxt'],
   routeRules: {
     '/admin': { redirect: '/admin/dashboard' },
     '/leaves': { ssr: false },

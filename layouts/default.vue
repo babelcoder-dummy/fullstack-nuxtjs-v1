@@ -1,4 +1,7 @@
 <template>
   <UiHeader />
-  <UContainer><slot /></UContainer>
+  <UContainer class="my-4">
+    <UiToast />
+    <slot />
+  </UContainer>
 </template>
