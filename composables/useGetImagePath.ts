@@ -7,5 +7,5 @@ export function useGetImagePath(file: string) {
   if (result.success)
     return file
 
-  return `${baseUrl}${file}`
+  return `${baseUrl}/api${file}`
 }

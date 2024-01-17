@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { data: user, status, signOut } = useAuth()
+const currentAvatar = computed(() => user.value?.image ? useGetImagePath(user.value.image) : undefined)
 const isAdmin = computed(() => ['ADMIN', 'MANAGER'].includes(user.value?.role))
 const authMenuItems = [
   [
@@ -58,7 +59,7 @@ const { data: contentNavigation } = await useAsyncData('navigation', () => fetch
       :popper="{ placement: 'bottom-start' }"
       class="mx-4 ml-auto"
     >
-      <UAvatar :src="user?.image" />
+      <UAvatar :src="currentAvatar" />
       <template #item="{ item }">
         <span class="truncate">{{ item.label }}</span>
         <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />

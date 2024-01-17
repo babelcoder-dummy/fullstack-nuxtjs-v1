@@ -16,6 +16,7 @@ const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'submit', profile: ProfileInput): void
 }>()
+const currentAvatar = props.profile?.image ? useGetImagePath(props.profile.image) : undefined
 const state = reactive<ProfileInput>({
   ...props.profile,
   password: undefined,
@@ -35,7 +36,7 @@ function onSubmit(event: FormSubmitEvent<ProfileInput>) {
     </h1>
     <UDivider />
     <UFormGroup label="Image" name="image">
-      <UiImageUploader :image="props.profile?.image" @submit="state.image = $event" />
+      <UiImageUploader :image="currentAvatar" @submit="state.image = $event" />
     </UFormGroup>
 
     <UFormGroup label="Name" name="name">

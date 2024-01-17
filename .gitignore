@@ -25,3 +25,6 @@ logs
 
 # Uploads
 public/uploads
+
+# Docker Data
+data
