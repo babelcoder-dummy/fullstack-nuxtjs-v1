@@ -25,7 +25,7 @@ const state = reactive(props.leave ?? {
   leaveDate: new Date().toISOString(),
 })
 
-watch(leaveDate, date => state.leaveDate = date.toISOString())
+watch(leaveDate, date => state.leaveDate = date?.toISOString())
 
 async function onSubmit(event: FormSubmitEvent<EmitData>) {
   emit('submit', event.data)
